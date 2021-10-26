@@ -8,7 +8,7 @@ const app = express();
 
 //informar ao express que o app irá trabalhar com arquivo json
 app.use(express.json());
-app.use(cors());
+app.use(cors());    
 
 const tarefas = [
     {
