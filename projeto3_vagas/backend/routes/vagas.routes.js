@@ -4,20 +4,20 @@ const router = express.Router();
 
 const vagas = [
     {
-        id: Date.now(),
+        id: 1,
         titulo: "Desenvolvedor Front-End",
-        empresa: "Blue",
-        logo: 'url logo', 
-        salário: '3500',
+        empresa: "ProTech",
+        logo: 'https://cdn3.f-cdn.com/contestentries/374094/15482618/56f4dd9ef192c_thumb900.jpg', 
+        salario: '3500',
         descricao: 'Desenvolvedor React',
         senioridade: "Junior"
     },
     {
-        id: Date.now(),
+        id: 2,
         titulo: "Desenvolvedor Back-End",
-        empresa: "Blue",
-        logo: 'url logo', 
-        salário: '5000',
+        empresa: "Top-Tech",
+        logo: 'https://logopond.com/logos/b6a699d5720f639fd5278a76add8283d.png', 
+        salario: '5000',
         descricao: 'Desenvolvedor .Net',
         senioridade: "Pleno"
     }
@@ -37,7 +37,7 @@ router.get('/:id', (req, res) =>{
 
 router.post('/add',(req,res) =>{
     const vaga = req.body;
-    vaga.id = Date.now();
+    vaga.id = vagas[vagas.length - 1].id + 1;
     vagas.push(vaga);
     res.status(201).send({
         message: 'Cadastrado com sucesso', 
@@ -66,13 +66,13 @@ router.put('/edit/:id', (req,res) =>{
 router.delete('/delete/:id', (req,res) =>{
     const idParam = req.params.id;
 
-    const index = vagas.findIndex((vaga) =>{
-        return vaga.id = idParam;
-    });
+    const index = vagas.findIndex(vaga => vaga.id == idParam);
+    
 
     let vagaExcluida = vagas[index];
     
     vagas.splice(index, 1);
+    console.log(index);
     res.send({
         message: `Vaga ${vagaExcluida.titulo} excluída com sucesso`
     });
